@@ -1,0 +1,36 @@
+# =============================================================================
+# GenAI API Gateway Infrastructure - .gitignore
+# =============================================================================
+
+# Azure ARM/Bicep outputs
+*.json.bak
+arm-ttk-output/
+deployment-outputs/
+
+# Local parameter overrides
+parameters/local.json
+parameters/*.local.json
+
+# Azure CLI authentication
+.azure/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# Secrets (should use Azure Key Vault)
+*.secret
+*.key
+secrets/

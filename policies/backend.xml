@@ -1,0 +1,34 @@
+<!--
+=============================================================================
+BACKEND POLICY
+=============================================================================
+Controls how requests are forwarded to the GenAI Orchestrator backend.
+Backend is treated as a BLACK BOX - no modification of request/response body.
+=============================================================================
+-->
+<policies>
+    <inbound>
+        <base />
+    </inbound>
+    
+    <backend>
+        <!-- =================================================================
+             BACKEND FORWARDING CONFIGURATION
+             ================================================================= -->
+        <forward-request 
+            timeout="30" 
+            follow-redirects="false" 
+            buffer-request-body="true"
+            buffer-response="false"
+            fail-on-error-status-code="false" />
+        
+    </backend>
+    
+    <outbound>
+        <base />
+    </outbound>
+    
+    <on-error>
+        <base />
+    </on-error>
+</policies>
