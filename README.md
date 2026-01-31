@@ -47,12 +47,13 @@ genai-api-gateway-infra/
 │
 ├── policies/
 │   ├── inbound.xml             # Auth, rate limit, headers
+│   ├── inbound.arm.json        # ARM-format policy for deployment
 │   ├── outbound.xml            # Response pass-through
 │   └── backend.xml             # Forwarding rules
 │
 ├── parameters/
 │   ├── dev.json                # Development environment
-│   └── prod.json               # Production environment
+│   └── prod.json               # Production (gitignored - sensitive)
 │
 ├── README.md
 └── .gitignore
@@ -68,6 +69,8 @@ genai-api-gateway-infra/
 | **Future** | Azure Entra ID upgrade path available |
 
 ## 🚦 Traffic Control
+
+**Default Rate Limit:** 60 calls/minute per subscription (configured in `inbound.xml`)
 
 | Product | Rate Limit | Daily Quota | Approval |
 |---------|------------|-------------|----------|
@@ -146,7 +149,7 @@ az deployment group create \
 ### Endpoint
 
 ```
-POST https://<apim-name>.azure-api.net/genai/v1/orchestrate
+POST https://<apim-name>.azure-api.net/genai/orchestrate
 ```
 
 ### Headers
@@ -159,13 +162,7 @@ POST https://<apim-name>.azure-api.net/genai/v1/orchestrate
 
 ### Request Body
 
-```json
-{
-  "prompt": "string (required)",
-  "context": {},
-  "options": {}
-}
-```
+Request body is passed through to the backend as-is. The gateway does not enforce a specific schema.
 
 ### Response Headers
 
